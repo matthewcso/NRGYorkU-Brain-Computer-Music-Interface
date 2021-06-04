@@ -9,7 +9,7 @@ MATLAB/Octave (???)
 Required Python libraries will be added as needed.
 
 ### Citations
-Currently, the code in this repo consists entirely of (Stefan Erlich's music generation algorithm)[https://github.com/stefan-ehrlich/code-algorithmicMusicGenerationSystem] and (Muhammad Nadzeri Munawar's Emotiv classifier)[https://github.com/nadzeri/Realtime-EEG-Based-Emotion-Recognition]. 
+Currently, the code in this repo consists entirely of [Stefan Erlich's music generation algorithm](https://github.com/stefan-ehrlich/code-algorithmicMusicGenerationSystem) and [Muhammad Nadzeri Munawar's Emotiv classifier](https://github.com/nadzeri/Realtime-EEG-Based-Emotion-Recognition). 
 
 We intend on using the (DEAP dataset)[http://www.eecs.qmul.ac.uk/mmv/datasets/deap/] in the future.
 
