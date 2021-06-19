@@ -8,9 +8,9 @@ import mido
 from time import sleep
 from chordlist import *
 from random import randrange
-import matplotlib.pyplot as plt
-from PIL import Image
-from IPython.display import clear_output
+#import matplotlib.pyplot as plt
+#from PIL import Image
+#from IPython.display import clear_output
 
 # download this if windows
 # https://coolsoft.altervista.org/en/download/CoolSoft_VirtualMIDISynth_2.11.2.exe
