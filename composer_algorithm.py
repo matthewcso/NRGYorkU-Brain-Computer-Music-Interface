@@ -16,9 +16,6 @@ from random import randrange
 # https://coolsoft.altervista.org/en/download/CoolSoft_VirtualMIDISynth_2.11.2.exe
 # soundfonts from here
 # https://github.com/urish/cinto/blob/master/media/FluidR3%20GM.sf2
-# pip install python-rtmidi
-# maybe this later
-# pip install PyQt5
 
 # %%
 #%matplotlib auto

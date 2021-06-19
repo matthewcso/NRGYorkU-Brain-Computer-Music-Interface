@@ -1,0 +1,7 @@
+numpy
+python-rtmidi
+mido
+# scipy
+# mne
+# matplotlib
+# PyQt5
