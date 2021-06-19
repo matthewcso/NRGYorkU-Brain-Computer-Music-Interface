@@ -7,7 +7,7 @@ To develop a Brain-Computer Music Interface (BCMI) to generate music based on a 
 There are 3 main parts of this project that can be developed in parallel. There may exist a number of technical difficulties involved in connecting multiple real-time data feeds to each other.
 
 - **EEG data feed:** We need to develop a pipeline for acquiring a real-time EEG data feed that can be attached to a classifier. This may be the most difficult step conceptually, as there are few good libraries available for acquiring this type of data from the Emotiv EPOC. 
-- **Emotion Classification:** We need to extract robust EEG features and we need to train a classifier or regressor to determine the emotional content from EEG data. While we can currently use publicly available datasets to train machine learning models, we might want to use a prospective dataset going forward into the future.
+- **Emotion Classification:** We need to extract robust EEG features and we need to train a classifier or regressor to determine the emotional content from EEG data. We will use publicly available EEG datasets for this task, and might want to incorporate some elements of semi-supervised learning (given the abundance of EEG data without labels).
 - **Music Generation:** We need to generate music based on the identified emotions. This can be done using Erlich's algorithm, which has been translated to Python at this point in time. As a brief note, it might potentially be better to do away with Erlich's algorithm entirely in the future and to use a generative adversarial music generation algorithm instead; however, this will be a technically difficult challenge.
 
 ### Requirements:
