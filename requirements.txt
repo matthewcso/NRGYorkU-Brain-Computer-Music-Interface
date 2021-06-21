@@ -1,7 +1,9 @@
 numpy
 python-rtmidi
 mido
-# scipy
-# mne
-# matplotlib
+pandas
+scipy
+mne
+scikit-learn
+matplotlib
 # PyQt5

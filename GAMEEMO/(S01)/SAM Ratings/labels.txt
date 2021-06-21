@@ -1,0 +1,5 @@
+Episode, Valence, Arousal
+G1, 1.5, 2
+G2, 3, 2.5
+G3, 1.5, 5
+G4, 3, 4.5

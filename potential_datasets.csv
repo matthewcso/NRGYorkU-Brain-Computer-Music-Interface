@@ -1,5 +1,5 @@
 ﻿"Dataset name (if none, username)",Potential mirrors (preferably no permission required),Has unprocessesed or minimally proceed EEG?,Notes
-DEAP,"http://www.eecs.qmul.ac.uk/mmv/datasets/deap/, https://github.com/mkfzdmr/Deep-Learning-based-Emotion-Recognition, https://github.com/Raghav714/EEG-Emotion-classification",Yes,
+DEAP,http://www.eecs.qmul.ac.uk/mmv/datasets/deap/,Yes,
 Dr. Saeed Mohsen,https://www.kaggle.com/drsaeedmohsen/eeghumanemotiondataset2021,No,
 GAMEEMO,https://www.kaggle.com/sigfest/database-for-emotion-recognition-system-gameemo,Please fill me,
 INTERFACES,https://github.com/IoBT-VISTEC/EEG-Emotion-Recognition-INTERFACES-datasets,Please fill me,
@@ -16,3 +16,4 @@ SEED IV,https://bcmi.sjtu.edu.cn/~seed/seed-iv.html,,
 SEED VIG,https://bcmi.sjtu.edu.cn/~seed/seed-vig.html,,
 HCI-Tagging,https://mahnob-db.eu/hci-tagging/,,
 Regulation of Arousal,https://ieee-dataport.org/open-access/regulation-arousal-online-neurofeedback-improves-human-performance-demanding-sensory#files,,
+AMIGOS,http://www.eecs.qmul.ac.uk/mmv/datasets/amigos/download.html,,
