@@ -65,7 +65,7 @@ drop_locs = np.any(reshaped_test_data[:, 1:] <0, axis=-1)
 reshaped_train_data = reshaped_train_data[np.logical_not(drop_locs)]
 reshaped_test_data = reshaped_test_data[np.logical_not(drop_locs)]
 
-npoints_5s = sample_rate*10
+npoints_5s = sample_rate*5
 slice_amt = int(np.floor(reshaped_train_data.shape[2]/npoints_5s))
 
 splitted_train_data = np.split(reshaped_train_data[:, :, :slice_amt *npoints_5s], slice_amt, axis=-1)
