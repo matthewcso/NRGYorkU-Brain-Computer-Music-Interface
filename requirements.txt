@@ -6,4 +6,5 @@ scipy
 mne
 scikit-learn
 matplotlib
+git+https://github.com/forrestbao/pyeeg.git
 # PyQt5
