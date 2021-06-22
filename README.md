@@ -12,8 +12,15 @@ There are 3 main parts of this project that can be developed in parallel. There 
 
 ### Requirements:
 - Python 3.x. Anaconda installation highly recommended. Ability to run Jupyter Notebooks highly recommended.
-- All libraries listed in requirements.txt. Run `pip install -r requirements.txt` from command line.
+- All libraries listed in requirements.txt. Run `pip install -r requirements.txt` from command line to install dependencies.
 - Emotiv EPOC Brain Activity Map
+
+### How to use:
+- If you haven't installed Python 3.x yet, [Anaconda](https://docs.anaconda.com/anaconda/install/) is highly recommended. Follow the instructions on the website. 
+- (Optional) If using Anaconda, create a new environment by running `conda create -n BCMI-env` (once). Then, every time you need to run the code, activate the environment by running `conda activate BCMI-env`.
+- Install the requirements (once) using `pip install -r requirements.txt`. 
+- Run `split_gameemo.py` by using `python split_gameemo.py`, using your IDE, or interactively in vscode.
+- Run `regression.ipynb` .
 
 ### Citations
 Currently, the code in this repo consists mostly of [Stefan Erlich's music generation algorithm](https://github.com/stefan-ehrlich/code-algorithmicMusicGenerationSystem).
