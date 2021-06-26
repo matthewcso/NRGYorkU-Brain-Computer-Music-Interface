@@ -1,5 +1,12 @@
-def controller(valence_mp, arousal_mp, currently_running):
+def controller(valence_mp, arousal_mp, currently_running, composer_setup_phase):
     from time import sleep
+
+    while True:
+        with composer_setup_phase.get_lock():
+            if not composer_setup_phase.value:
+                break
+            else:
+                sleep(0.25)
     print('Controller running')
     while True:
         with valence_mp.get_lock():
@@ -23,6 +30,8 @@ def controller(valence_mp, arousal_mp, currently_running):
                     with arousal_mp.get_lock():
                         arousal_mp.value = a
             except ValueError:
+                print('Invalid input.')
+            except IndexError:
                 print('Invalid input.')
 
 

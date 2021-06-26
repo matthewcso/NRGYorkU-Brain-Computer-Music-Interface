@@ -3,7 +3,7 @@
 # This is suboptimal because we can't do much in the same thread as the music playing, because it will screw up the music.
 # So, I think it's important that we have some sort of threaded approach: music generation writes to a shared list.
 
-def composer_process(valence_mp, arousal_mp, currently_running):
+def composer_process(valence_mp, arousal_mp, currently_running, composer_setup_phase):
     global currently_playing
     import numpy as np
     import mido
@@ -41,6 +41,9 @@ def composer_process(valence_mp, arousal_mp, currently_running):
 
     print('ComposerState: Composer started\n')
     idx = 0
+
+    with composer_setup_phase.get_lock():
+        composer_setup_phase.value = False
 
     while True:
         with currently_running.get_lock():
