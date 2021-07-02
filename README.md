@@ -13,7 +13,9 @@ There are 3 main parts of this project that can be developed in parallel. There 
 ### Requirements:
 - Python 3.x. Anaconda installation highly recommended. Ability to run Jupyter Notebooks highly recommended.
 - All libraries listed in requirements.txt. Run `pip install -r requirements.txt` from command line to install dependencies.
-- Emotiv EPOC Brain Activity Map
+- VirtualMIDISynth. You can download this software from [here](https://coolsoft.altervista.org/en/download/CoolSoft_VirtualMIDISynth_2.11.2.exe).
+- Sound fonts for VirtualMIDISynth. I used [these](https://github.com/urish/cinto/blob/master/media/FluidR3%20GM.sf2) soundfonts.
+
 
 ### How to use:
 - If you haven't installed Python 3.x yet, [Anaconda](https://docs.anaconda.com/anaconda/install/) is highly recommended. Follow the instructions on the website. 
