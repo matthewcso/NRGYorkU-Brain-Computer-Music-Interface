@@ -5,6 +5,7 @@ from os.path import join
 
 import pandas as pd
 import numpy as np
+from utils.split import split_features_and_labels
 
 # Things associated with the GAMEEMO dataset
 # The sampling rate is supposed to be 128 Hz and time time of recording 5 mins/trial, but this doesn't add up entirely correctly. I'll assume 128 Hz is correct, though.
@@ -28,13 +29,16 @@ for folder in listdir(top_level):
         data = pd.read_csv(join(target, '.csv format', subfolder)).dropna(axis='columns', how='all')
 
         assert list(data.columns) == electrodes
-        data['ID'] = subfolder[:subfolder.find('All')]
+        data.insert(loc=0, column = 'ID', value=subfolder[:subfolder.find('All')])
+
         this_subject.append(data)
     all_feature_data.append(np.stack(this_subject))
 
     target = join(top_level, folder, 'SAM Ratings/labels.txt')
     data = pd.read_csv(target)
     data['Episode'] = [folder[1:-1]+x for x in data['Episode']]
+    data['Subject'] = [int(x[1:3]) for x in data['Episode']]
+    data['Trial'] = [int(x[4:5]) for x in data['Episode']]
     data=data.rename(columns={'Episode':'ID'})
 
     all_label_data.append(data)
@@ -47,9 +51,9 @@ print(all_label_data.shape)
 
 # %%
 # Collapse the first two dimensions of the previous matrix, getting the number of total trials.
-# Reshaped to dimensionality (n_total_trials x eeg length x n_channels)
+# Reshaped to dimensionality (n_total_trials x eeg length x (ID+n_channels))
 reshaped_feature_data = np.reshape(all_feature_data, [all_feature_data.shape[0]* all_feature_data.shape[1], all_feature_data.shape[2], all_feature_data.shape[3]])
-# Reshaped to dimensionality (n_total_trials x 2(valence, arousal))
+# Reshaped to dimensionality (n_total_trials x (ID, valence, arousal, subject, trial))
 reshaped_label_data = np.reshape(all_label_data, [all_label_data.shape[0]*all_label_data.shape[1], all_label_data.shape[2]])
 
 # reshaped to dimensionality (n_total_trials x n_channels x n_times)
@@ -58,35 +62,22 @@ reshaped_feature_data = np.transpose(reshaped_feature_data, [0, 2, 1])
 print(reshaped_feature_data.shape)
 print(reshaped_label_data.shape)
 
-
-# %%
-# Drop any labels that have negative valence/arousal (invalid)
-drop_locs = np.any(reshaped_label_data[:, 1:] <0, axis=-1)
-
-reshaped_feature_data = reshaped_feature_data[np.logical_not(drop_locs)]
-reshaped_label_data = reshaped_label_data[np.logical_not(drop_locs)]
-
-# %%
-# Split features into 5 second intervals, then assign appropriate labels according to the 5 second intervals.
-npoints_5s = sample_rate*5
-slice_amt = int(np.floor(reshaped_feature_data.shape[2]/npoints_5s))
-
-splitted_feature_data = np.split(reshaped_feature_data[:, :, :slice_amt *npoints_5s], slice_amt, axis=-1)
-splitted_feature_data = np.asarray(splitted_feature_data)
-splitted_feature_data = np.reshape(splitted_feature_data, [splitted_feature_data.shape[0]*splitted_feature_data.shape[1], splitted_feature_data.shape[2], splitted_feature_data.shape[3]])
-print(splitted_feature_data.shape)
-
-concatenated = np.concatenate([reshaped_label_data for _ in range(slice_amt)])
-
 # %%
 # Check to see if the features and labels correspond to the same trials (I had an issue with that before)
 # and then save all the data, after removing the trial number columns.
-# In summary, the resulting features are an array containing raw EEG data split into 5-second intervals. 
-# (dimensionality of n subjects*n trials*slice_amt x n_electrodes x 128*5)
-# and the labels are an array containing valence and arousal for each 5-second interval.
-# (dimensionality of n subjects*n trials*slice_amt x 2)
+assert(np.all(reshaped_feature_data[:, 0, 0]==reshaped_label_data[:, 0]))
+#reshaped_feature_data, reshaped_label_data = split_features_and_labels(reshaped_feature_data, reshaped_feature_data, sample_rate, 5)
+np.save('gameemo_features.npy', reshaped_feature_data[:, 1:].astype('float32'))
+np.save('gameemo_labels.npy', reshaped_label_data[:, 1:].astype('float32'))
 
-assert(np.all(concatenated[:, 0]==splitted_feature_data[:, -1, 0]))
-np.save('eeg_splitted_features.npy', splitted_feature_data[:, :-1].astype('float32'))
-np.save('eeg_splitted_labels.npy', concatenated[:, 1:].astype('float32'))
+
+# %%
+# Drop any labels that have negative valence/arousal (invalid)
+#drop_locs = np.any(reshaped_label_data[:, 1:] <0, axis=-1)
+
+#reshaped_feature_data = reshaped_feature_data[np.logical_not(drop_locs)]
+#reshaped_label_data = reshaped_label_data[np.logical_not(drop_locs)]
+
+# %%
+
 
