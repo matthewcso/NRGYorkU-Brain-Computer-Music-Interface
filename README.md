@@ -17,16 +17,9 @@ There are 3 main parts of this project that can be developed in parallel. There 
 - Sound fonts for VirtualMIDISynth. I used [these](https://github.com/urish/cinto/blob/master/media/FluidR3%20GM.sf2) soundfonts.
 
 
-### How to use:
-- If you haven't installed Python 3.x yet, [Anaconda](https://docs.anaconda.com/anaconda/install/) is highly recommended. Follow the instructions on the website. 
-- (Optional) If using Anaconda, create a new environment by running `conda create -n BCMI-env` (once). Then, every time you need to run the code, activate the environment by running `conda activate BCMI-env`.
-- Install the requirements (once) using `pip install -r requirements.txt`. 
-- Run `split_gameemo.py` by using `python split_gameemo.py`, using your IDE, or interactively in vscode.
-- Run `regression.ipynb` .
-
 ### Citations
 - [Stefan Erlich's music generation algorithm](https://github.com/stefan-ehrlich/code-algorithmicMusicGenerationSystem).
-- [GAMEEMO dataset, used for current classifier training](https://www.kaggle.com/sigfest/database-for-emotion-recognition-system-gameemo)
+
 - We intend on using the [DEAP dataset](http://www.eecs.qmul.ac.uk/mmv/datasets/deap/) for classifier training in the future. 
 - Ehrlich, S. K., Agres, K. R., Guan, C., & Cheng, G. (2019). A closed-loop, music-based brain-computer interface for emotion mediation. PloS one, 14(3), e0213516. URL/DOI: https://doi.org/10.1371/journal.pone.0213516
 

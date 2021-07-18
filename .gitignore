@@ -2,5 +2,4 @@
 .vscode/settings.json
 *.pyc
 *.out
-eeg_splitted_features.npy
-eeg_splitted_labels.npy
+*.npy
