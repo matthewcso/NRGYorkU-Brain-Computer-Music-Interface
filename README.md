@@ -1,5 +1,6 @@
 # NRGYorkU Brain Computer Music Interface
 
+
 ### Goal:
 To develop a Brain-Computer Music Interface (BCMI) to generate music based on a person's emotions, as determined by real-time EEG classification using an Emotiv kit.
 
