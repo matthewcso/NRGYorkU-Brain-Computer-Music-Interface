@@ -1,3 +1,4 @@
+# %%
 # This code is mostly copy-pasted from the muse-lsl examples
 
 

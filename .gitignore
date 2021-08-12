@@ -3,3 +3,4 @@
 *.pyc
 *.out
 *.npy
+**/OpenBCI_GUI

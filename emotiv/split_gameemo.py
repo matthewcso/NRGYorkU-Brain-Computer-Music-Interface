@@ -5,7 +5,7 @@ from os.path import join
 
 import pandas as pd
 import numpy as np
-from utils.split import split_features_and_labels
+#from utils.split import split_features_and_labels
 
 # Things associated with the GAMEEMO dataset
 # The sampling rate is supposed to be 128 Hz and time time of recording 5 mins/trial, but this doesn't add up entirely correctly. I'll assume 128 Hz is correct, though.
