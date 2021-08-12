@@ -6,7 +6,7 @@ from classify_stream import classify
 from eeg_openbci_stream import openbci_streamer, openbci_setup
 import numpy as np
 
-USE_SYNTHETIC = False
+USE_SYNTHETIC = True
 RUN_COMPOSER = True
 DEBUG_STREAMER = False
 DEBUG_CLASSIFIER = False
