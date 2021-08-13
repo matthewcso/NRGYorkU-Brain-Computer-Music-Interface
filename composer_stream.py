@@ -3,7 +3,7 @@
 # This is suboptimal because we can't do much in the same thread as the music playing, because it will screw up the music.
 # So, I think it's important that we have some sort of threaded approach: music generation writes to a shared list.
 
-def composer_process(valence_mp, arousal_mp, currently_running, composer_setup_phase, eeg_setup_phase):
+def composer_process(valence_mp, arousal_mp, currently_running, composer_setup_phase, eeg_setup_phase, synth='VirtualMIDISynth #1 0'):
     global currently_playing
     import numpy as np
     import mido
@@ -15,7 +15,7 @@ def composer_process(valence_mp, arousal_mp, currently_running, composer_setup_p
     ports = mido.get_output_names()
     print(ports)
 
-    device =  mido.open_output('VirtualMIDISynth #1 0')
+    device = mido.open_output(synth) 
 
     currently_playing = []
     def randi(ls):# might be wrong

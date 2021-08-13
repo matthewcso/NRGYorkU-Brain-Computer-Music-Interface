@@ -9,7 +9,7 @@ import numpy as np
 USE_SYNTHETIC = True
 RUN_COMPOSER = True
 DEBUG_STREAMER = False
-DEBUG_CLASSIFIER = False
+DEBUG_CLASSIFIER = True
 N_LAST = 5
 channel_names = 'Fp1,Fp2,T3,T4'.split(',')
 valence_mp = multiprocessing.Value('d',0.5)
@@ -50,7 +50,8 @@ if __name__ == '__main__':
     openbci_streamer(last_eeg_mp, eeg_setup_phase, currently_running, N_LAST, USE_SYNTHETIC)
 
   if RUN_COMPOSER:
-    p2 = multiprocessing.Process(target=composer_process, args=(valence_mp, arousal_mp, currently_running, composer_setup_phase, eeg_setup_phase))
+    p2 = multiprocessing.Process(target=composer_process, args=(valence_mp, arousal_mp, \
+              currently_running, composer_setup_phase, eeg_setup_phase, 'LoopBe Internal MIDI 1'))
     p2.start()
 
   if not DEBUG_CLASSIFIER:
