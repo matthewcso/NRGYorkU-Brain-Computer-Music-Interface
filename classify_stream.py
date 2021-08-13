@@ -33,7 +33,7 @@ def classify(last_eeg_mp, valence_mp, arousal_mp, eeg_setup_phase, currently_run
       # last_value is in shape 4 x 1000 or so
 
       # old processing pipeline
-      eeg_channels = last_value[1:(len(channel_names)+1), :]
+      eeg_channels = last_value#[1:(len(channel_names)+1), :]
       data_channels = np.ravel([[bin_power(channel, band, Fs=sampling_rate)[0] for band in bands] for channel in eeg_channels])
 
       # new processing pipeline

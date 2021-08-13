@@ -9,7 +9,7 @@ import numpy as np
 USE_SYNTHETIC = True
 RUN_COMPOSER = True
 DEBUG_STREAMER = False
-DEBUG_CLASSIFIER = True
+DEBUG_CLASSIFIER = False
 N_LAST = 5
 channel_names = 'Fp1,Fp2,T3,T4'.split(',')
 valence_mp = multiprocessing.Value('d',0.5)
@@ -59,13 +59,16 @@ if __name__ == '__main__':
       arousal_mp, eeg_setup_phase, currently_running, \
       n_samples, BRAINFLOW_MAGIC_N, n_samples/N_LAST, channel_names, eeg_idx, USE_SYNTHETIC))
     p3.start()
+
   else:
     classify(last_eeg_mp, valence_mp, arousal_mp, eeg_setup_phase, currently_running, \
       n_samples, n_rows=BRAINFLOW_MAGIC_N, sampling_rate = n_samples/N_LAST, \
       channel_names = channel_names, eeg_channel_idx = eeg_idx, \
       use_synthetic = USE_SYNTHETIC)
 
-  controller(valence_mp, arousal_mp, currently_running, eeg_setup_phase, composer_setup_phase)
-
+  if RUN_COMPOSER:  
+    controller(valence_mp, arousal_mp, currently_running, eeg_setup_phase, composer_setup_phase)
+  else:
+    print('You need to run the composer to use the controller!')
 
 # %%
