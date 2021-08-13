@@ -33,40 +33,40 @@ def classify(last_eeg_mp, valence_mp, arousal_mp, eeg_setup_phase, currently_run
       # last_value is in shape 4 x 1000 or so
 
       # old processing pipeline
-      eeg_channels = last_value[1:(len(channel_names)+1), :]
-      data_channels = np.ravel([[bin_power(channel, band, Fs=sampling_rate)[0] for band in bands] for channel in eeg_channels])
+    #  eeg_channels = last_value[1:(len(channel_names)+1), :]
+    #  data_channels = np.ravel([[bin_power(channel, band, Fs=sampling_rate)[0] for band in bands] for channel in eeg_channels])
 
       # new processing pipeline
       # cannot use automatic ICA because we don't have an EOG channel
-   #   current_arr = mne.io.RawArray(last_value*1e6, info=info) # *1e6 because units of Ganglion are in micro-volts
+      current_arr = mne.io.RawArray(last_value*1e6, info=info) # *1e6 because units of Ganglion are in micro-volts
       # Low-pass filter to remove slow drifts
-   #   current_arr = current_arr.filter(l_freq=1, h_freq=None, verbose='WARNING') 
+      # current_arr = current_arr.filter(l_freq=1, h_freq=None, verbose='WARNING') 
       # Notch filter to remove power-line
-   #   current_arr = current_arr.notch_filter(freqs=50, verbose='WARNING') # 50 Hz power signal in Canada
+      # current_arr = current_arr.notch_filter(freqs=50, verbose='WARNING') # 50 Hz power signal in Canada
 
-   #   eeg_data = []
-   #   fnames = []
-   #   for band in bands:
-   #      this_band = current_arr.copy()
-   #      this_band = this_band.filter(band[0], band[1]).to_data_frame()[channel_names]/1e6 #undo the *1e6
-   #      # this_band is in shape 4 (n channels) x 1000
-   #      power = [bin_power(this_band[channel], [0, 100], Fs=sampling_rate)[0] for channel in this_band.columns]
-   #      # power is in shape 4 (n channels)
-   #      eeg_data.append(power)
-   #      these_fnames = [str(band[0])+'-'+str(band[1])+'|' +channel for channel in this_band.columns]
-   #      fnames.append(these_fnames)
-      # eeg_data is in shape 4 (n bands) x 4 (n channels)
-   #   eeg_data = np.transpose(eeg_data)
+      eeg_data = []
+      fnames = []
+      for band in bands:
+         this_band = current_arr.copy()
+         this_band = this_band.filter(band[0], band[1]).to_data_frame()[channel_names]#/1e6 #undo the *1e6
+         # this_band is in shape 4 (n channels) x 1000
+         power = [bin_power(this_band[channel], [0, 100], Fs=sampling_rate)[0] for channel in this_band.columns]
+         # power is in shape 4 (n channels)
+         eeg_data.append(power)
+         these_fnames = [str(band[0])+'-'+str(band[1])+'|' +channel for channel in this_band.columns]
+         fnames.append(these_fnames)
+   #   # eeg_data is in shape 4 (n bands) x 4 (n channels)
+      eeg_data = np.transpose(eeg_data)
       # eeg_data is in shape 4 (n channels) x 4 (n bands)
 
       # eeg_data is in shape 16 (n_channels x n_bands)
-   #   data_channels = np.ravel(eeg_data)
+      data_channels = np.ravel(eeg_data)
       # same with fnames
-   #   fnames = np.ravel(np.transpose(np.asarray(fnames, dtype='object')))
+      fnames = np.ravel(np.transpose(np.asarray(fnames, dtype='object')))
 
       # these assert statements technically should only be run once, a bit inefficient
-   #   assert np.all(valence_classifier.features_used == fnames)
-   #   assert np.all(arousal_classifier.features_used == fnames)
+      assert np.all(valence_classifier.features_used == fnames)
+      assert np.all(arousal_classifier.features_used == fnames)
     
       with valence_mp.get_lock():
          valence_mp.value = valence_classifier.predict_proba(np.expand_dims(data_channels, axis=0))[0]
